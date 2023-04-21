@@ -49,3 +49,20 @@ func (configSQLiteRepository *ConfigSQLiteRepository) GetWithVersion(ctx context
 	}
 	return config, nil
 }
+
+
+func (configSQLiteRepository *ConfigSQLiteRepository) Save(ctx context.Context, config domain.Config) error {
+	stmt, err := configSQLiteRepository.client.Prepare("INSERT INTO tablename (project_name, env, version, created_at, state, data) VALUES (?, ?, ?, ?, ?, ?)")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer stmt.Close()
+
+	_, err = stmt.Exec(config.ConfigProjectName, config.ConfigEnv, config.ConfigVersion, config.ConfigCreatedAt, config.ConfigState, config.ConfigData)
+	if err != nil {
+		log.Fatal(err)
+		return err
+	}
+	return nil
+}
+
