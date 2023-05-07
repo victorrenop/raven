@@ -17,5 +17,5 @@ vet: fmt
 
 ## Build the app
 build: vet
-	go build 
+	go build -o app cmd/api/main.go
 .PHONY:build
