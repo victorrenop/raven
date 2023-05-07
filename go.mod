@@ -4,7 +4,10 @@ go 1.18
 
 require (
 	github.com/gin-gonic/gin v1.9.0
+	github.com/go-playground/assert/v2 v2.2.0
+	github.com/google/go-cmp v0.5.5
 	github.com/mattn/go-sqlite3 v1.14.16
+	github.com/sirupsen/logrus v1.9.0
 )
 
 require (

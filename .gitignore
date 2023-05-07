@@ -9,6 +9,9 @@
 # Test binary, built with `go test -c`
 *.test
 
+# Test files
+test.db
+
 # Output of the go profiling tool
 *.prof
 

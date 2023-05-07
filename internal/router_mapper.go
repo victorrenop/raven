@@ -5,12 +5,14 @@ import (
 	"github.com/victorrenop/raven/internal/controllers"
 )
 
+// WrappedRouter instance containing the gin gonic engine and the ping controller
 type WrappedRouter struct {
 	Router        *gin.Engine
 	HealthChecker *controllers.HealthChecker
 }
 
-func (wrappedRouter *WrappedRouter) SetupRouter() {
+// Function that initiates all of the required controllers and endpoints
+func (wrappedRouter *WrappedRouter) setupRouter() {
 	if wrappedRouter.Router == nil {
 		wrappedRouter.Router = gin.Default()
 	}
@@ -24,8 +26,9 @@ func (wrappedRouter *WrappedRouter) mapRoutes() {
 	router.GET("/ping", wrappedRouter.HealthChecker.PingHandler)
 }
 
+// Run function instatiates every controller, route and the API itself
 func (wrappedRouter *WrappedRouter) Run(port string) error {
-	wrappedRouter.SetupRouter()
+	wrappedRouter.setupRouter()
 
 	return wrappedRouter.Router.Run(":" + port)
 }
